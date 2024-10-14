@@ -1,14 +1,14 @@
-# Advanced Token Sale Smart Contract
+# Food Ordering Smart Contract
 
-This smart contract implements an advanced token sale mechanism where users can buy tokens, subject to purchase limits, and the owner has full control over the token price, contract funds, and contract termination. It also includes robust error handling using Solidity's `require()`, `revert()`, and `assert()` functions.
+This smart contract implements a decentralized food ordering system where users can place orders, deposit funds, and cancel active orders. The owner can manage the menu and ensure proper contract operation. It includes robust error handling using Solidity's `require()`, `revert()`, and `assert()` functions.
 
 ## Features
 
-- **Token Sale**: Users can purchase tokens as long as they send enough Ether and do not exceed the maximum purchase limit.
-- **Ownership Control**: The contract owner can mint tokens, set token prices, withdraw funds, and terminate the contract.
-- **Dynamic Pricing**: The owner can update the price per token anytime.
-- **Contract Termination**: The owner can terminate the contract once all tokens are sold, transferring remaining Ether to their account.
-- **Error Handling**: The contract employs `require()` to enforce conditions like token availability and Ether sufficiency, `revert()` to stop execution if unsold tokens remain during contract termination, and `assert()` to check for contract invariants like balance consistency.
+- **Order Food**: Users can order food from a predefined menu, and the total price is deducted from their balance if they have sufficient funds.
+- **Cancel Orders**: Users can cancel active orders and receive a refund.
+- **Deposit and Withdraw Funds**: Users can deposit Ether to their account balance and withdraw their balance when needed.
+- **Menu Management**: The owner can manage the food items and prices in the menu.
+- **Error Handling**: The contract uses `require()` to enforce conditions like sufficient balance and valid orders, `revert()` to stop execution on failure conditions (e.g., insufficient funds), and `assert()` for balance consistency checks.
 
 ## Installation
 
@@ -18,16 +18,16 @@ This smart contract implements an advanced token sale mechanism where users can 
 
 ## Interaction
 
-- **Buy Tokens**: Users can buy tokens by sending Ether, with a limit on how many can be bought in one transaction.
-- **Withdraw Funds**: Only the contract owner can withdraw Ether accumulated from token sales.
-- **Set Token Price**: The owner can update the price per token.
-- **Terminate Contract**: The contract can only be terminated when all tokens are sold, ensuring proper closure.
+- **Order Food**: Users select food items from the menu, specifying the quantity, and the total cost is deducted from their account.
+- **Cancel Order**: Users can cancel an order to receive a refund for the full amount of the order.
+- **Deposit Funds**: Users deposit Ether to their account to make purchases.
+- **Withdraw Funds**: Users can withdraw their balance (in Ether) at any time.
 
 ## Security
 
-- **Access Control**: Only the contract owner can withdraw funds, change token prices, and terminate the contract.
-- **Invariants**: The contract checks token availability, Ether sufficiency, and total balance consistency before key actions.
-- **Safe Termination**: Ensures that the contract cannot be closed prematurely if tokens remain unsold.
+- **Access Control**: Only the owner can modify the menu.
+- **Invariants**: The contract checks for sufficient user balances and ensures refunds do not cause overflows or inconsistencies.
+- **Error Handling**: Uses `revert()` and `assert()` to handle insufficient funds, invalid orders, and consistency in balance management.
 
 ## License
 
